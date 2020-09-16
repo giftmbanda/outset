@@ -116,7 +116,7 @@ const SignUp = () => {
                   required
                   fullWidth
                   name="phone"
-                  label="phone"
+                  label="Phone"
                   type="phone"
                   id="phone"
                   autoComplete="current-phone"
@@ -135,7 +135,7 @@ const SignUp = () => {
             <Grid container justify="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
-                  Already have an accountwith OutSet? Sign in
+                  Already have an account with OutSet? Sign in
                 </Link>
               </Grid>
             </Grid>
