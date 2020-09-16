@@ -1,55 +1,42 @@
-import React, { Component } from "react";
-import { MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse } from "mdbreact";
-import { BrowserRouter as Router } from "react-router-dom";
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
 
-class Navbar extends Component {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+}));
 
-  state = { 
-    isOpen: false,
-   };
+function NavBar() {
+  const classes = useStyles();
 
-  toggleCollapse = () => { 
-    this.setState({ isOpen: !this.state.isOpen }); 
-  };
-
-  render() {
-    return (
-      <Router>
-
-        <MDBNavbar color="black" dark expand="md">
-
-          <MDBNavbarBrand>
-            <strong className="white-text">OutSet</strong>
-          </MDBNavbarBrand>
-
-          <MDBNavbarToggler onClick={this.toggleCollapse} />
-          <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
-            
-            <MDBNavbarNav left>
-              <MDBNavItem active>
-                <MDBNavLink to="#!">Home</MDBNavLink>
-              </MDBNavItem>
-              <MDBNavItem>
-                <MDBNavLink to="#!">About</MDBNavLink>
-              </MDBNavItem>
-            </MDBNavbarNav>
-
-            <MDBNavbarNav right>
-              <MDBNavItem>
-                <MDBNavLink to="#!">Cart</MDBNavLink>
-              </MDBNavItem>
-              <MDBNavItem>
-              <MDBNavLink to="#!">Profile</MDBNavLink>
-              </MDBNavItem>
-            </MDBNavbarNav>
-            
-          </MDBCollapse>
-
-        </MDBNavbar>
-
-      </Router>
-    );
-  }
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar variant="dense">
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" color="inherit">
+            Photos
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }
 
-export default Navbar;
+export default NavBar;
