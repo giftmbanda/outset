@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css"; //Import here your file style
+import "./App.css"; // Import here your file style
 // import ItemCard from "./pages/ItemCard"
 // import Footer from "./components/Footer";
 // import Checkout from "./pages/Checkout";
