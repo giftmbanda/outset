@@ -12,12 +12,13 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Copyright from "../components/Copyright";
-import { useStyles } from "../styles/SignInSide.styles";
+import { useStyles } from "../styles/SignInSide.style";
 
 const SignInSide = () => {
   const classes = useStyles();
 
-  const [formData, setFormData] = useState(null);
+  const initializeformData = { email: "", password: "" };
+  const [formData, setFormData] = useState(initializeformData);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value.trim() });
@@ -27,26 +28,27 @@ const SignInSide = () => {
     e.preventDefault();
     console.log(formData);
 
-    const urlPath = "http://outset-v1.herokuapp.com/user/login";
-    let response = await sendPostRequest(urlPath, formData);
+    // const urlPath = "http://outset-v1.herokuapp.com/user/login";
+    // let response = await sendPostRequest(urlPath, formData);
 
-    if (response.ok) {
-      let res = await response.json();
-      console.log(res);
-    } else {
-      let res = await response.json();
-      console.log(res);
-    }
+    // if (response.ok) {
+    //   let res = await response.json();
+    //   console.log(res);
+    // } else {
+    //   let res = await response.json();
+    //   console.log(res);
+    // }
+    setFormData(initializeformData); //clear the form
   };
-  
-  const sendPostRequest = async (url = "", data = {}) => {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data), // body data type must match "Content-Type" header
-    });
-    return response; // parses JSON response into native JavaScript objects
-  };
+
+  // const sendPostRequest = async (url = "", data = {}) => {
+  //   const response = await fetch(url, {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(data), // body data type must match "Content-Type" header
+  //   });
+  //   return response; // parses JSON response into native JavaScript objects
+  // };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -62,25 +64,27 @@ const SignInSide = () => {
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
+              required
+              autoFocus
+              fullWidth
               variant="outlined"
               margin="normal"
-              required
-              fullWidth
-              label="Email Address"
               name="email"
+              label="Email Address"
               autoComplete="email"
-              autoFocus
+              value={formData.email}
               onChange={handleChange}
             />
             <TextField
-              variant="outlined"
-              margin="normal"
               required
               fullWidth
+              variant="outlined"
+              margin="normal"
               name="password"
               label="Password"
               type="password"
               autoComplete="current-password"
+              value={formData.password}
               onChange={handleChange}
             />
             <FormControlLabel
@@ -104,8 +108,8 @@ const SignInSide = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="/" variant="body2">
+                  "Don't have an account? Sign Up
                 </Link>
               </Grid>
             </Grid>

@@ -11,11 +11,20 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Copyright from "../components/Copyright";
 import useStyles from "../styles/SignUp.style";
+// import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'; //fovalidators
 
 const SignUp = () => {
   const classes = useStyles(); //css styles
 
-  const [formData, setFormData] = useState(null);
+  const initializeFormData = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    phone: "",
+  };
+
+  const [formData, setFormData] = useState(initializeFormData);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value.trim() });
@@ -25,7 +34,7 @@ const SignUp = () => {
     e.preventDefault();
     console.log(formData);
 
-    // const urlPath = "";
+    // const urlPath = "http://outset-v1.herokuapp.com/user";
     // let response = await sendPostRequest(urlPath, formData);
 
     // if (response.ok) {
@@ -35,6 +44,7 @@ const SignUp = () => {
     //   let res = await response.json();
     //   console.log(res);
     // }
+    setFormData(initializeFormData); //clear the form
   };
 
   // const sendPostRequest = async (url = "", data = {}) => {
@@ -62,76 +72,90 @@ const SignUp = () => {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  name="firstName"
-                  variant="outlined"
                   required
-                  fullWidth
-                  label="First Name"
-                  autoComplete="firstname"
                   autoFocus
+                  fullWidth
+                  variant="outlined"
+                  name="firstName"
+                  label="First Name"
+                  autoComplete="firstName"
+                  value={formData.firstName}
                   onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  required
+                  fullWidth
+                  variant="outlined"
                   name="lastName"
-                  variant="outlined"
-                  required
-                  fullWidth
                   label="Last Name"
-                  autoComplete="lastname"
+                  autoComplete="lastName"
+                  value={formData.lastName}
                   onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  variant="outlined"
                   required
                   fullWidth
-                  label="Email Address"
+                  variant="outlined"
                   name="email"
+                  label="Email Address"
                   autoComplete="email"
+                  value={formData.email}
                   onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  variant="outlined"
                   required
                   fullWidth
+                  variant="outlined"
                   name="password"
                   label="Password"
                   type="password"
                   autoComplete="current-password"
+                  value={formData.password}
                   onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                  variant="outlined"
                   required
                   fullWidth
+                  variant="outlined"
+                  name="comfirmPassword"
+                  label="Comfirm Password"
+                  type="password"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  variant="outlined"
                   name="phone"
                   label="Phone Number"
                   autoComplete="phone"
+                  value={formData.phone}
                   onChange={handleChange}
                 />
               </Grid>
             </Grid>
             <Button
-              type="submit"
               fullWidth
-              variant="contained"
+              type="submit"
               color="primary"
+              variant="contained"
               className={classes.submit}
-              onClick={handleSubmit}
             >
               Sign Up
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
-                  Already have an account with OutSet? Sign in
+                <Link href="/login" variant="body2">
+                  Already have an account with? Sign in
                 </Link>
               </Grid>
             </Grid>
