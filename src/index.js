@@ -1,17 +1,20 @@
+import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
+import './index.css';
 import * as serviceWorker from './serviceWorker';
+//import '@fortawesome/fontawesome-free/css/all.min.css';
+//import 'bootstrap-css-only/css/bootstrap.min.css';
+//import 'mdbreact/dist/css/mdb.css';
 
-// import '@fortawesome/fontawesome-free/css/all.min.css';
-// import 'bootstrap-css-only/css/bootstrap.min.css';
-// import 'mdbreact/dist/css/mdb.css';
+axios.defaults.baseURL = "http://outset-v1.herokuapp.com";
+axios.defaults.headers = localStorage.getItem('token');
 
 ReactDOM.render(
-  <React.StrictMode>
+  <>
     <App />
-  </React.StrictMode>,
+  </>,
   document.getElementById('root')
 );
 

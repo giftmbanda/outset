@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   heroContent: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
+    padding: theme.spacing(8, 0, 0),
   },
   heroButtons: {
     marginTop: theme.spacing(4),
@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   cardMedia: {
-    paddingTop: '56.25%',
+    paddingTop: '90%', //56.25% = 16:9
   },
   cardContent: {
     flexGrow: 1,

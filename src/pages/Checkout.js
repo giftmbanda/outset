@@ -1,28 +1,22 @@
-import React, { useState } from "react";
+import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Paper from "@material-ui/core/Paper";
-import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
+import Stepper from "@material-ui/core/Stepper";
 import Typography from "@material-ui/core/Typography";
-import AddressForm from "../components/AddressForm";
+import React, { useState } from "react";
 import PaymentForm from "../components/PaymentForm";
 import Review from "../components/Review";
-import Copyright from "../components/Copyright";
 import { useStyles } from "../styles/Checkout.style";
 
-const steps = ["Shipping address", "Payment details", "Review your order"];
+const steps = ["Payment details", "Review your order"];
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return <AddressForm />;
-    case 1:
       return <PaymentForm />;
-    case 2:
+    case 1:
       return <Review />;
     default:
       throw new Error("Unknown step");
@@ -44,13 +38,6 @@ export default function Checkout() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Company name
-          </Typography>
-        </Toolbar>
-      </AppBar>
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
@@ -97,7 +84,6 @@ export default function Checkout() {
             )}
           </React.Fragment>
         </Paper>
-        <Copyright />
       </main>
     </React.Fragment>
   );

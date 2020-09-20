@@ -48,17 +48,12 @@ const useStyles = (theme) => ({
   },
 });
 
-const initialformData = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  phone: "",
-};
-
-class SignUp extends Component {
+class SignIn extends Component {
   state = {
-    formData: initialformData,
+    formData: {
+      email: "",
+      password: "",
+    },
     submitted: false,
   };
 
@@ -85,7 +80,7 @@ class SignUp extends Component {
     //   console.log(response);
     // }
 
-    this.setState({ formData: "" }); // clear the form
+    // this.setState({ formData: "" }); // clear the form
   };
 
   // sendPostRequest = async (url = "", data = {}) => {
@@ -110,7 +105,7 @@ class SignUp extends Component {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign Up
+              Sign In
             </Typography>
             <ValidatorForm
               className={classes.form}
@@ -118,37 +113,6 @@ class SignUp extends Component {
               noValidate
             >
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                  <TextValidator
-                    required
-                    autoFocus
-                    fullWidth
-                    variant="outlined"
-                    name="firstName"
-                    label="First Name"
-                    autoComplete="firstName"
-                    value={formData.firstName || ""}
-                    onChange={this.handleChange}
-                    validators={["required"]}
-                    errorMessages={["this field is required"]}
-                    //helperText={null}
-                    //error={false}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextValidator
-                    required
-                    fullWidth
-                    variant="outlined"
-                    name="lastName"
-                    label="Last Name"
-                    autoComplete="lastName"
-                    value={formData.lastName || ""}
-                    onChange={this.handleChange}
-                    validators={["required"]}
-                    errorMessages={["this field is required"]}
-                  />
-                </Grid>
                 <Grid item xs={12}>
                   <TextValidator
                     required
@@ -181,32 +145,6 @@ class SignUp extends Component {
                     errorMessages={["this field is required"]}
                   />
                 </Grid>
-                <Grid item xs={12}>
-                  <TextValidator
-                    required
-                    fullWidth
-                    variant="outlined"
-                    name="comfirmPassword"
-                    label="Comfirm Password"
-                    type="password"
-                    validators={["required"]}
-                    errorMessages={["this field is required"]}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextValidator
-                    required
-                    fullWidth
-                    variant="outlined"
-                    name="phone"
-                    label="Phone Number"
-                    autoComplete="phone"
-                    value={formData.phone || ""}
-                    onChange={this.handleChange}
-                    validators={["required"]}
-                    errorMessages={["this field is required"]}
-                  />
-                </Grid>
               </Grid>
               <Button
                 fullWidth
@@ -216,12 +154,17 @@ class SignUp extends Component {
                 className={classes.submit}
                 //disabled={submitted.disabled}
               >
-                Sign Up
+                Sign In
               </Button>
               <Grid container justify="flex-end">
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
                 <Grid item>
-                  <Link href="/login" variant="body2">
-                    Already have an account? Sign in
+                  <Link href="/register" variant="body2">
+                    Don't have an account? Sign Up
                   </Link>
                 </Grid>
               </Grid>
@@ -236,4 +179,4 @@ class SignUp extends Component {
   }
 }
 
-export default withStyles(useStyles)(SignUp);
+export default withStyles(useStyles)(SignIn);
