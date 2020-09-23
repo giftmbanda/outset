@@ -1,21 +1,18 @@
-import axios from 'axios';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
-import * as serviceWorker from './serviceWorker';
-//import '@fortawesome/fontawesome-free/css/all.min.css';
-//import 'bootstrap-css-only/css/bootstrap.min.css';
-//import 'mdbreact/dist/css/mdb.css';
+import axios from "axios";
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import "./index.css";
+import * as serviceWorker from "./serviceWorker";
 
 axios.defaults.baseURL = "http://outset-v1.herokuapp.com";
-axios.defaults.headers = localStorage.getItem('token');
+axios.defaults.headers = localStorage.getItem("token");
 
 ReactDOM.render(
-  <>
+  <React.Fragment>
     <App />
-  </>,
-  document.getElementById('root')
+  </React.Fragment>,
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

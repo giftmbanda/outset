@@ -1,15 +1,13 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
+import IconButton from "@material-ui/core/IconButton";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
+import React from "react";
 import { withRouter } from "react-router-dom";
-import Button from '@material-ui/core/Button';
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NavBar = (props) => {
-  
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -43,7 +40,11 @@ const NavBar = (props) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" className={classes.title} onClick={() => handleMenuClick("/")}>
+          <Typography
+            variant="h6"
+            className={classes.title}
+            onClick={() => handleMenuClick("/")}
+          >
             OutSet
           </Typography>
 
@@ -78,6 +79,9 @@ const NavBar = (props) => {
               </MenuItem>
               <MenuItem onClick={() => handleMenuClick("/register")}>
                 Register
+              </MenuItem>
+              <MenuItem onClick={() => handleMenuClick("/forgotpassword")}>
+                Forgot Password
               </MenuItem>
               <MenuItem onClick={() => handleMenuClick("/checkout")}>
                 Checkout

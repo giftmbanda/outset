@@ -6,11 +6,11 @@ import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import React from "react";
 import { useStyles } from "../styles/SignUp.styles";
 
-const SignUp = () => {
+const ForgotPassword = () => {
   const classes = useStyles();
 
   return (
@@ -18,36 +18,13 @@ const SignUp = () => {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <MailOutlineIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          {"Sign up"}
+          {"Forgot Password"}
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="fname"
-                name="firstName"
-                variant="outlined"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                name="lastName"
-                autoComplete="lname"
-              />
-            </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -59,28 +36,6 @@ const SignUp = () => {
                 autoComplete="email"
               />
             </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="phone"
-                label="Phone"
-                type="number"
-                autoComplete="phone"
-              />
-            </Grid>
           </Grid>
           <Button
             type="submit"
@@ -89,12 +44,12 @@ const SignUp = () => {
             color="primary"
             className={classes.submit}
           >
-            {"Sign Up"}
+            {"Send Email"}
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
               <Link href="/login" variant="body2">
-                {"Already have an account? Sign in"}
+                {"You know your passowrd? Sign in"}
               </Link>
             </Grid>
           </Grid>
@@ -107,4 +62,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default ForgotPassword;

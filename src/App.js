@@ -4,25 +4,31 @@ import React from "react";
 import "./App.css"; // Import here your file style
 import ItemCard from "./pages/ItemCard";
 import Checkout from "./pages/Checkout";
-import SignInSide from "./pages/SignIn";
+import SignIn from "./pages/SignIn";
 import NavBar from "./components/NavBar";
+import ForgotPassword from "./pages/ForgotPassword";
 import SignUp from "./pages/SignUp";
 
 const App = () => {
   return (
     <Router>
-      <NavBar/>
+      <NavBar />
       <Switch>
         <Route exact path="/">
           {" "}
           <ItemCard />
         </Route>
-        <Route exact path="/register">
-          <SignUp />
-        </Route>
         <Route exact path="/login">
           {" "}
-          <SignInSide />
+          <SignIn />
+        </Route>
+        <Route exact path="/register">
+          {" "}
+          <SignUp />
+        </Route>
+        <Route exact path="/forgotpassword">
+          {" "}
+          <ForgotPassword />
         </Route>
         <Route exact path="/checkout">
           {" "}
