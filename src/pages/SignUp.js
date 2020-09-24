@@ -11,10 +11,11 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
-// require('yup-phone');
 import Copyright from "../components/Copyright";
-import { useStyles } from "./SignUp.styles";
-//+27 72 943 3017
+import { useStyles } from "../styles/SignUp.styles";
+// require('yup-phone');
+
+
 const phoneRegExp = "^[0-9]{10}$";
 const initialValues = {
   firstName: "",
