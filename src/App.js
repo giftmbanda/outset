@@ -14,11 +14,15 @@ const App = () => {
     <Router>
       <NavBar />
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/home">
           {" "}
           <ItemCard />
         </Route>
         <Route exact path="/login">
+          {" "}
+          <SignIn />
+        </Route>
+        <Route exact path="/">
           {" "}
           <SignIn />
         </Route>

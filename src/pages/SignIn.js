@@ -20,19 +20,16 @@ const initialValues = {
 };
 
 const SignupSchema = Yup.object().shape({
-  email: Yup.string().min(4).email().required(),
+  email: Yup.string().email().required(),
   password: Yup.string().min(4).required(),
 });
 
-// const formik = useFormik({});
+const handleSubmit = (values) => {
+  console.log(values.email);
+};
 
 const SignIn = () => {
   const classes = useStyles();
-
-  const handleSubmit = (values) => {
-    console.log(values);
-    //alert(JSON.stringify(values));
-  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -44,7 +41,7 @@ const SignIn = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-          {"Sign in"}
+            {"Sign in"}
           </Typography>
 
           <Formik
@@ -56,8 +53,8 @@ const SignIn = () => {
               return (
                 <Form>
                   <Field
-                    required
                     autoFocus
+                    required
                     fullWidth
                     as={TextField}
                     name="email"
@@ -99,7 +96,7 @@ const SignIn = () => {
                   <Grid container>
                     <Grid item xs>
                       <Link href="/ForgotPassword" variant="body2">
-                       { "Forgot password?"}
+                        {"Forgot password?"}
                       </Link>
                     </Grid>
                     <Grid item>

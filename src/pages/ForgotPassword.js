@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import React from "react";
 import { useStyles } from "../styles/SignUp.styles";
 
@@ -27,10 +27,10 @@ const ForgotPassword = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                variant="outlined"
                 required
                 fullWidth
-                id="email"
+                autoFocus
+                variant="outlined"
                 label="Email Address"
                 name="email"
                 autoComplete="email"
