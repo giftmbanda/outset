@@ -1,4 +1,5 @@
 import Avatar from "@material-ui/core/Avatar";
+import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,27 +10,47 @@ import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import axios from "axios";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
+import Copyright from "../components/Copyright";
 import { useStyles } from "../styles/SignIn.tyles";
+import { withRouter } from "react-router-dom";
 
 const initialValues = {
   email: "",
   password: "",
 };
 
-const SignupSchema = Yup.object().shape({
-  email: Yup.string().email().required(),
-  password: Yup.string().min(4).required(),
+const SigninSchema = Yup.object().shape({
+  email: Yup.string().email().required("Required"),
+  password: Yup.string().min(4).required("Required"),
 });
 
-const handleSubmit = (values) => {
-  console.log(values.email);
-};
-
-const SignIn = () => {
+const SignIn = (props) => {
   const classes = useStyles();
+  const [user, setUser] = useState({});
+
+  const handleRedirect = (pageUrl) => {
+    const { history } = props;
+    history.push(pageUrl);
+  };
+
+  const onSubmit = async (values) => {
+    const urlPath = "/user/login";
+    const body = values;
+    const response = await axios.post(urlPath, body);
+
+    if (response.status && response.statusText === "OK") {
+      setUser(response.data);
+      handleRedirect("/");
+    } else {
+      setUser(null);
+    }
+  };
+
+  console.log(user);
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -46,12 +67,25 @@ const SignIn = () => {
 
           <Formik
             initialValues={initialValues}
-            onSubmit={handleSubmit}
-            validationSchema={SignupSchema}
+            validationSchema={SigninSchema}
+            onSubmit={onSubmit}
           >
-            {({ dirty, isValid }) => {
+            {({
+              errors,
+              values,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              dirty,
+              isValid,
+            }) => {
               return (
-                <Form>
+                <Form
+                  onSubmit={handleSubmit}
+                  className={classes.form}
+                  noValidate
+                >
                   <Field
                     autoFocus
                     required
@@ -63,7 +97,10 @@ const SignIn = () => {
                     label="Email"
                     type="email"
                     autoComplete="email"
-                    value={Formik.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                    error={Boolean(touched.email && errors.email)}
                     helperText={<ErrorMessage name="email" />}
                   />
                   <Field
@@ -75,8 +112,11 @@ const SignIn = () => {
                     variant="outlined"
                     label="Password"
                     type="password"
-                    autoComplete="current-password"
-                    value={Formik.password}
+                    autoComplete="password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                    error={Boolean(touched.password && errors.password)}
                     helperText={<ErrorMessage name="password" />}
                   />
                   <FormControlLabel
@@ -105,6 +145,9 @@ const SignIn = () => {
                       </Link>
                     </Grid>
                   </Grid>
+                  <Box mt={5}>
+                    <Copyright />
+                  </Box>
                 </Form>
               );
             }}
@@ -115,4 +158,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default withRouter(SignIn);

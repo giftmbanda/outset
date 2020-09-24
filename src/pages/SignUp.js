@@ -8,15 +8,14 @@ import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import axios from "axios";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import Copyright from "../components/Copyright";
 import { useStyles } from "../styles/SignUp.styles";
-// require('yup-phone');
+import { withRouter } from "react-router-dom";
 
-
-const phoneRegExp = "^[0-9]{10}$";
 const initialValues = {
   firstName: "",
   lastName: "",
@@ -26,21 +25,37 @@ const initialValues = {
 };
 
 const SignupSchema = Yup.object().shape({
-  firstName: Yup.string().min(4).required(),
-  lastName: Yup.string().min(4).required(),
-  email: Yup.string().email().required(),
-  password: Yup.string().min(4).required(),
+  firstName: Yup.string().min(4).required("Required"),
+  lastName: Yup.string().min(4).required("Required"),
+  email: Yup.string().email().required("Required"),
+  password: Yup.string().min(4).required("Required"),
   phone: Yup.string()
-    .required()
-    .matches(phoneRegExp, "Must be a valid 10 digits phone number"),
+    .required("Required")
+    .matches("^[0-9]{10}$", "Must be a valid 10 digits phone number"),
 });
 
-const handleSubmit = (values) => {
-  console.log(values);
-};
-
-const SignUp = () => {
+const SignUp = (props) => {
   const classes = useStyles();
+  const [user, setUser] = useState({});
+
+  const handleRedirect = (pageUrl) => {
+    const { history } = props;
+    history.push(pageUrl);
+  };
+
+  const onSubmit = async (values) => {
+    const urlPath = "/user";
+    const body = values;
+    const response = await axios.post(urlPath, body);
+    if (response.status && response.statusText === "OK") {
+      setUser(response.data.user);
+      handleRedirect("/login");
+    } else {
+      setUser(null);
+    }
+  };
+
+  console.log(user);
 
   return (
     <Grid container className={classes.root}>
@@ -56,12 +71,25 @@ const SignUp = () => {
           </Typography>
           <Formik
             initialValues={initialValues}
-            onSubmit={handleSubmit}
             validationSchema={SignupSchema}
+            onSubmit={onSubmit}
           >
-            {({ dirty, isValid }) => {
+            {({
+              errors,
+              values,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              dirty,
+              isValid,
+            }) => {
               return (
-                <Form>
+                <Form
+                  onSubmit={handleSubmit}
+                  className={classes.form}
+                  noValidate
+                >
                   <Grid container spacing={2}>
                     <Grid item xs={12} sm={6}>
                       <Field
@@ -73,8 +101,10 @@ const SignUp = () => {
                         margin="normal"
                         variant="outlined"
                         label="First Name"
-                        type="text"
-                        value={Formik.firstName}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.firstName}
+                        error={Boolean(touched.firstName && errors.firstName)}
                         helperText={<ErrorMessage name="firstName" />}
                       />
                     </Grid>
@@ -87,8 +117,10 @@ const SignUp = () => {
                         margin="normal"
                         variant="outlined"
                         label="Last Name"
-                        type="text"
-                        value={Formik.lastName}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.lastName}
+                        error={Boolean(touched.lastName && errors.lastName)}
                         helperText={<ErrorMessage name="lastName" />}
                       />
                     </Grid>
@@ -102,8 +134,10 @@ const SignUp = () => {
                         variant="outlined"
                         label="Email"
                         type="email"
-                        autoComplete="email"
-                        value={Formik.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.email}
+                        error={Boolean(touched.email && errors.email)}
                         helperText={<ErrorMessage name="email" />}
                       />
                     </Grid>
@@ -117,7 +151,10 @@ const SignUp = () => {
                         variant="outlined"
                         label="Password"
                         type="password"
-                        value={Formik.password}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.password}
+                        error={Boolean(touched.password && errors.password)}
                         helperText={<ErrorMessage name="password" />}
                       />
                     </Grid>
@@ -131,7 +168,10 @@ const SignUp = () => {
                         variant="outlined"
                         label="Phone"
                         type="text"
-                        value={Formik.phone}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.phone}
+                        error={Boolean(touched.phone && errors.phone)}
                         helperText={<ErrorMessage name="phone" />}
                       />
                     </Grid>
@@ -166,4 +206,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default withRouter(SignUp);

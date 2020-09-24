@@ -22,9 +22,12 @@ const ItemCard = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const request = await axios.get(`${url}`);
-      setProduct(request.data.products);
-      return request;
+      const response = await axios.get(`${url}`);
+      if (response.status && response.statusText === "OK") {
+        setProduct(response.data.products);
+      } else {
+        setProduct(null);
+      }
     }
     fetchData();
   }, [url]);
@@ -59,13 +62,13 @@ const ItemCard = () => {
                     tirble={prod.name}
                   />
                   <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      {prod.price}
+                    <Typography gutterBottom variant="h6">
+                      {`R ${prod.price}`}
                     </Typography>
-                    <Typography gutterBottom variant="h6" component="h2">
-                      {prod.name}
+                    <Typography>{prod.name}</Typography>
+                    <Typography>
+                      <strong>{prod.category.name}</strong>
                     </Typography>
-                    <Typography>{prod.category.name}</Typography>
                   </CardContent>
                   <CardActions>
                     <IconButton color="inherit">
