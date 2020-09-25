@@ -58,7 +58,7 @@ const ItemCard = () => {
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://giftmbanda.com/images/profile-img.jpg"
+                    image={prod.productImage}
                     tirble={prod.name}
                   />
                   <CardContent className={classes.cardContent}>
