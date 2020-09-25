@@ -58,8 +58,8 @@ const ItemCard = () => {
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image={prod.productImage}
-                    tirble={prod.name}
+                    image={"https://outset-v1.herokuapp.com/"`${prod.productImage}`}
+                    title={prod.name}
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h6">
