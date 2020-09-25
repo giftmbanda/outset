@@ -22,7 +22,6 @@ const initialValues = {
   email: "",
   password: "",
   phone: "",
-  comfirmPassword: "",
 };
 
 const SignupSchema = Yup.object().shape({
@@ -33,10 +32,6 @@ const SignupSchema = Yup.object().shape({
   phone: Yup.string()
     .required("Required")
     .matches("^[0-9]{10}$", "Must be a valid 10 digits phone number"),
-  // comfirmPassword: Yup.string()
-  //   .min(4)
-  //   .oneOf([Yup.ref("password")], "Passwords do not match")
-  //   .required("Required"),
 });
 
 const SignUp = (props) => {
@@ -164,25 +159,6 @@ const SignUp = (props) => {
                         helperText={<ErrorMessage name="password" />}
                       />
                     </Grid>
-                    {/* <Grid item xs={12}>
-                      <Field
-                        required
-                        fullWidth
-                        as={TextField}
-                        name="comfirmPassword"
-                        margin="normal"
-                        variant="outlined"
-                        label="Comfirm Password"
-                        type="password"
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        value={values.comfirmPassword}
-                        error={Boolean(
-                          touched.comfirmPassword && errors.comfirmPassword
-                        )}
-                        helperText={<ErrorMessage name="comfirmPassword" />}
-                      />
-                    </Grid> */}
                     <Grid item xs={12}>
                       <Field
                         required
