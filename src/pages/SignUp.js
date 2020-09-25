@@ -49,16 +49,16 @@ const SignUp = (props) => {
   };
 
   const onSubmit = async (values) => {
-    //const urlPath = "/user";
+    const urlPath = "/user";
     const body = values
     console.log(body);
-    // const response = await axios.post(urlPath, body);
-    // if (response.status && response.statusText === "OK") {
-    //   setUser(response.data.user);
-    //   handleRedirect("/login");
-    // } else {
-    //   setUser(null);
-    // }
+    const response = await axios.post(urlPath, body);
+    if (response.status && response.statusText === "OK") {
+      setUser(response.data.user);
+      handleRedirect("/login");
+    } else {
+      setUser(null);
+    }
   };
 
   console.log(user);
