@@ -8,7 +8,7 @@ import SignIn from "./pages/SignIn";
 import NavBar from "./components/NavBar";
 import ForgotPassword from "./pages/ForgotPassword";
 import SignUp from "./pages/SignUp";
-
+import ResetPassword from "./pages/ResetPassword";
 const App = () => {
   return (
     <Router>
@@ -29,6 +29,10 @@ const App = () => {
         <Route exact path="/forgotpassword">
           {" "}
           <ForgotPassword />
+        </Route>
+        <Route exact path="/resetpassword">
+          {" "}
+          <ResetPassword />
         </Route>
         <Route exact path="/checkout">
           {" "}

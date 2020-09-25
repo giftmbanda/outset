@@ -135,12 +135,12 @@ const SignIn = (props) => {
                   </Button>
                   <Grid container>
                     <Grid item xs>
-                      <Link href="/ForgotPassword" variant="body2">
+                      <Link href="" variant="body2" onClick={() =>handleRedirect("/forgotpassword")}>
                         {"Forgot password?"}
                       </Link>
                     </Grid>
                     <Grid item>
-                      <Link href="/register" variant="body2">
+                      <Link href="" variant="body2" onClick={() =>handleRedirect("/register")}>
                         {"Don't have an account? Sign Up"}
                       </Link>
                     </Grid>

@@ -4,27 +4,30 @@ import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
+import { withRouter } from "react-router-dom";
 import * as Yup from "yup";
 import Copyright from "../components/Copyright";
 import { useStyles } from "../styles/SignUp.styles";
-import { withRouter } from "react-router-dom";
-
 
 const initialValues = {
-  email: "",
+  password: "",
+  comfirmPassword: "",
 };
 
 const EmailSchema = Yup.object().shape({
-  email: Yup.string().email().required("Required"),
+  password: Yup.string().min(4).required("Required"),
+  comfirmPassword: Yup.string()
+    .min(4)
+    .oneOf([Yup.ref("password")], 'Passwords do not match')
+    .required("Required"),
 });
 
-const ForgotPassword = (props) => {
+const ResetPassword = (props) => {
   const classes = useStyles();
 
   const handleRedirect = (pageUrl) => {
@@ -37,15 +40,14 @@ const ForgotPassword = (props) => {
     // const urlPath = "/user/forgotpassword";
     // const body = values;
     // const response = await axios.post(urlPath, body);
-    
+
     // if (response.status && response.statusText === "OK") {
     //   setUser(response.data);
-    //    handleRedirect("/resetpassword")
+    //   handleRedirect("/login")
     // } else {
     //   setUser(null);
     // }
   };
-
 
   return (
     <Container component="main" maxWidth="xs">
@@ -77,21 +79,38 @@ const ForgotPassword = (props) => {
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
                     <Field
-                      autoFocus
                       required
                       fullWidth
                       as={TextField}
-                      name="email"
+                      name="password"
                       margin="normal"
                       variant="outlined"
-                      label="Email"
-                      type="email"
-                      autoComplete="email"
+                      label="New Password"
+                      type="password"
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      value={values.email}
-                      error={Boolean(touched.email && errors.email)}
-                      helperText={<ErrorMessage name="email" />}
+                      value={values.password}
+                      error={Boolean(touched.password && errors.password)}
+                      helperText={<ErrorMessage name="password" />}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Field
+                      required
+                      fullWidth
+                      as={TextField}
+                      name="comfirmPassword"
+                      margin="normal"
+                      variant="outlined"
+                      label="Comfirm New Password"
+                      type="password"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.comfirmPassword}
+                      error={Boolean(
+                        touched.comfirmPassword && errors.comfirmPassword
+                      )}
+                      helperText={<ErrorMessage name="comfirmPassword" />}
                     />
                   </Grid>
                 </Grid>
@@ -103,15 +122,8 @@ const ForgotPassword = (props) => {
                   className={classes.submit}
                   disabled={!dirty || !isValid}
                 >
-                  {"Send Email"}
+                  {"Reset Password"}
                 </Button>
-                <Grid container justify="flex-end">
-                  <Grid item>
-                    <Link href="" variant="body2" onClick={() =>handleRedirect("/login")}>
-                      {"You know your passowrd? Sign in"}
-                    </Link>
-                  </Grid>
-                </Grid>
               </Form>
             );
           }}
@@ -124,4 +136,4 @@ const ForgotPassword = (props) => {
   );
 };
 
-export default withRouter(ForgotPassword);
+export default withRouter(ResetPassword);
