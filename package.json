@@ -2,6 +2,7 @@
   "name": "outset",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://outset-v1.herokuapp.co",
   "engines": {
     "node": "12.18.3",
     "npm": "6.14.6"
