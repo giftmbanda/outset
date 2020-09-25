@@ -15,6 +15,7 @@ import * as Yup from "yup";
 import Copyright from "../components/Copyright";
 import { useStyles } from "../styles/SignUp.styles";
 import { withRouter } from "react-router-dom";
+import MyBackdrop from "../components/MyBackdrop";
 
 const initialValues = {
   firstName: "",
@@ -37,6 +38,7 @@ const SignupSchema = Yup.object().shape({
 const SignUp = (props) => {
   const classes = useStyles();
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleRedirect = (pageUrl) => {
     const { history } = props;
@@ -45,9 +47,10 @@ const SignUp = (props) => {
 
   const onSubmit = async (values) => {
     const urlPath = "/user";
-    const body = values
-    console.log(body);
+    const body = values;
+    setLoading(true);
     const response = await axios.post(urlPath, body);
+    setLoading(false);
     if (response.status && response.statusText === "OK") {
       setUser(response.data.user);
       handleRedirect("/login");
@@ -60,6 +63,7 @@ const SignUp = (props) => {
 
   return (
     <Grid container className={classes.root}>
+      <MyBackdrop loading={loading} />
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
