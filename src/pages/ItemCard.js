@@ -64,7 +64,8 @@ const ItemCard = () => {
                   <CardMedia
                     className={classes.cardMedia}
                     // {"https://source.unsplash.com/random"}
-                    image={`https://outset-v1.herokuapp.com/${prod.productImage}`}
+                    // {`https://outset-v1.herokuapp.com/${prod.productImage}`}
+                    image={"https://source.unsplash.com/random"}
                     title={prod.name}
                   />
                   <CardContent className={classes.cardContent}>
