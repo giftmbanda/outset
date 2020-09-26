@@ -14,14 +14,13 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Copyright from "../components/Copyright";
 import { useStyles } from "../styles/ItemCard.style";
-import MyBackdrop from "../components/MyBackdrop"
+import MyBackdrop from "../components/MyBackdrop";
 
 const ItemCard = () => {
   const classes = useStyles();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   const url = "/product/show";
-  //const load = false;
 
   useEffect(() => {
     async function fetchData() {
@@ -29,7 +28,7 @@ const ItemCard = () => {
       const response = await axios.get(`${url}`);
       setLoading(false);
       if (response.status && response.statusText === "OK") {
-        setProduct(response.data.products);      
+        setProduct(response.data.products);
       } else {
         setProduct(null);
       }
@@ -41,7 +40,7 @@ const ItemCard = () => {
 
   return (
     <React.Fragment>
-      <MyBackdrop loading={loading}/>
+      <MyBackdrop loading={loading} />
       <CssBaseline />
       <main>
         <div className={classes.heroContent}>
@@ -58,14 +57,14 @@ const ItemCard = () => {
         </div>
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
-          <Grid container spacing={1}>      
+          <Grid container spacing={1}>
             {product.map((prod) => (
               <Grid item key={prod._id} xs={6} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    // {"https://source.unsplash.com/random"}                                   
-                    image={`https://outset-v1.herokuapp.com//${prod.productImage}`} 
+                    // {"https://source.unsplash.com/random"}
+                    image={`https://outset-v1.herokuapp.com/${prod.productImage}`}
                     title={prod.name}
                   />
                   <CardContent className={classes.cardContent}>
