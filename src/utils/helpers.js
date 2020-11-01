@@ -1,43 +1,76 @@
+import cookie from "js-cookie";
 
-  // fetchData = async () => {
-  //   const request = await axios.get(`${urlPath}`);
-  //   this.setState({user: request.data.products});
-  //   return request;
-  // };
+/*
+store the user'info in localstorage 
+store the token in the cookie
+*/
 
-  // handleChange = (e) => {
-  //   const { formData } = this.state;
-  //   formData[e.target.name] = e.target.value.trim();
-  //   this.setState({ formData });
-  // };
+export const setCookie = (key, value) => {
+  if (window !== "undefined") {
+    cookie.set(key, value, {
+      expires: 1,
+    });
+  }
+};
 
-  // handleSubmit = async (e) => {
-  //   e.preventDefault();
+export const removeCookie = (key) => {
+  if (window !== "undefined") {
+    cookie.remove(key, {
+      expires: 1,
+    });
+  }
+};
 
-  //   const { formData } = this.state;
-  //   console.log(formData);
+export const getCookie = (key) => {
+  if (window !== "undefined") {
+    return cookie.get(key);
+  }
+};
 
-  //   let res = await this.sendPostRequest(urlPath, formData);
+export const setLocalStorage = (key, value) => {
+  if (window !== "undefined") {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+};
 
-  //   if (res.status === 200 && res.ok) {
-  //     const response = await res.json();
-  //     this.setState({ user: response.user, msg: response.message });
-  //     console.log(response.user);
-  //     return response;
-  //     // parses JSON response into native JavaScript objects
-  //   } else {
-  //     const response = await res.json();
-  //     //this.setState({ msg: response.message });
-  //     console.log(response.message);
-  //     return response;
-  //   }
-  // };
+export const removeLocalStorage = (key) => {
+  if (window !== "undefined") {
+    localStorage.removeItem(key);
+  }
+};
 
-  // sendPostRequest = async (url = "", data = {}) => {
-  //   const response = await fetch(url, {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(data), // body data type must match "Content-Type" header
-  //   });
-  //   return response;
-  // };
+export const authenticate = (response, next) => {
+  // console.log('AUTHENTICATE HELPER ON SIGNIN RESPONSE', response);
+  setCookie("token", response.data.token);
+  setLocalStorage("user", response.data.user);
+  next();
+};
+
+export const isAuth = () => {
+  if (window !== "undefined") {
+    const cookieChecked = getCookie("token");
+    if (cookieChecked) {
+      if (localStorage.getItem("user")) {
+        return JSON.parse(localStorage.getItem("user"));
+      } else {
+        return false;
+      }
+    }
+  }
+};
+
+export const signout = (next) => {
+  removeCookie("token");
+  removeLocalStorage("user");
+  next();
+};
+
+export const updateUser = (response, next) => {
+  // console.log('UPDATE USER IN LOCALSTORAGE HELPERS', response);
+  if (typeof window !== "undefined") {
+    let auth = JSON.parse(localStorage.getItem("user"));
+    auth = response.data;
+    localStorage.setItem("user", JSON.stringify(auth));
+  }
+  next();
+};

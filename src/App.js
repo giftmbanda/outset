@@ -1,43 +1,27 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React from "react";
-
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css"; // Import here your file style
-import ItemCard from "./pages/ItemCard";
-import Checkout from "./pages/Checkout";
-import SignIn from "./pages/SignIn";
 import NavBar from "./components/NavBar";
+import Checkout from "./pages/Checkout";
 import ForgotPassword from "./pages/ForgotPassword";
-import SignUp from "./pages/SignUp";
+import ItemCard from "./pages/ItemCard";
 import ResetPassword from "./pages/ResetPassword";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+//import PrivatePage from './utils/PrivateRoute';
+
+
 const App = () => {
   return (
     <Router>
       <NavBar />
       <Switch>
-        <Route exact path="/">
-          {" "}
-          <ItemCard />
-        </Route>
-        <Route exact path="/login">
-          {" "}
-          <SignIn />
-        </Route>
-        <Route exact path="/register">
-          {" "}
-          <SignUp />
-        </Route>
-        <Route exact path="/forgotpassword">
-          {" "}
-          <ForgotPassword />
-        </Route>
-        <Route exact path="/resetpassword">
-          {" "}
-          <ResetPassword />
-        </Route>
-        <Route exact path="/checkout">
-          {" "}
-          <Checkout />
-        </Route>
+        <Route exact path="/" component={ItemCard} />
+        <Route exact path="/login" component={SignIn} />
+        <Route exact path="/register" component={SignUp} />
+        <Route exact path="/forgotpassword" component={ForgotPassword} />
+        <Route exact path="/resetpassword" component={ResetPassword} />
+        <Route exact path="/checkout" component={Checkout} />
       </Switch>
     </Router>
   );
