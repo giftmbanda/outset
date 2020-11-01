@@ -7,14 +7,10 @@ const cors = require("cors");
 app.use(cors());
 app.use(express.static(path.join(__dirname, "build")));
 
-app.use("/ping", (req, res) => {
-  res.send("pong");
-});
-
 app.use("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
 app.listen(port, () => {
-  console.log(`server is runnung on http://localhost:${port}`);
+  console.log(`server is running on http://localhost:${port}`);
 }); //node server.js
