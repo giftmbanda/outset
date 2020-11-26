@@ -30,10 +30,10 @@ const EmailSchema = Yup.object().shape({
 const ResetPassword = (props) => {
   const classes = useStyles();
 
-  const handleRedirect = (pageUrl) => {
-    const { history } = props;
-    history.push(pageUrl);
-  };
+  // const handleRedirect = (pageUrl) => {
+  //   const { history } = props;
+  //   history.push(pageUrl);
+  // };
 
   const onSubmit = async (values) => {
     console.log(values);
