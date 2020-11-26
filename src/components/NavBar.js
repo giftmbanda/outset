@@ -61,7 +61,6 @@ const NavBar = (props) => {
                   <MenuItem onClick={() => handleMenuClick("/")}>Home</MenuItem>
                   <MenuItem onClick={() => handleMenuClick("/login")}>Login</MenuItem>
                   <MenuItem onClick={() => handleMenuClick("/register")}>Register</MenuItem>
-                  <MenuItem onClick={() => handleMenuClick("/forgotpassword")}>Forgot Password</MenuItem>
                   <MenuItem onClick={() => handleMenuClick("/checkout")}>Checkout</MenuItem>
                 </Menu>
               </> :
@@ -70,7 +69,7 @@ const NavBar = (props) => {
               <Button color="inherit" onClick={() => handleMenuClick("/")}>Home</Button>
               <Button color="inherit" onClick={() => handleMenuClick("/login")}>Login</Button>
               <Button color="inherit" onClick={() => handleMenuClick("/register")}>Register</Button>
-              <Button color="inherit" onClick={() => handleMenuClick("/forgotpassword")}>Checkout</Button>
+              <Button color="inherit" onClick={() => handleMenuClick("/checkout")}>Checkout</Button>
               </>
             }
           </div>
