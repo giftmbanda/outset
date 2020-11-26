@@ -53,55 +53,31 @@ const NavBar = (props) => {
           </Typography>
 
           <div>
-            {isMobile ? (
+            {isMobile ? 
               <>
-                {" "}
-                <IconButton
-                  edge="start"
-                  className={classes.menuButton}
-                  color="inherit"
-                  onClick={handleMenu}
-                  aria-label="menu"
-                >
+                <IconButton edge="start" className={classes.menuButton} color="inherit" onClick={handleMenu} aria-label="menu">
                   <MenuIcon />
                 </IconButton>
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={open}
-                  onClose={() => setAnchorEl(null)}
-                >
+                  anchorOrigin={{vertical: "top", horizontal: "right",}} keepMounted
+                  transformOrigin={{ vertical: "top", horizontal: "right",}} open={open} onClose={() => setAnchorEl(null)}>
                   <MenuItem onClick={() => handleMenuClick("/")}>Home</MenuItem>
-                  <MenuItem onClick={() => handleMenuClick("/login")}>
-                    Login
-                  </MenuItem>
-                  <MenuItem onClick={() => handleMenuClick("/register")}>
-                    Register
-                  </MenuItem>
-                  <MenuItem onClick={() => handleMenuClick("/forgotpassword")}>
-                    Forgot Password
-                  </MenuItem>
-                  <MenuItem onClick={() => handleMenuClick("/checkout")}>
-                    Checkout
-                  </MenuItem>
+                  <MenuItem onClick={() => handleMenuClick("/login")}>Login</MenuItem>
+                  <MenuItem onClick={() => handleMenuClick("/register")}>Register</MenuItem>
+                  <MenuItem onClick={() => handleMenuClick("/forgotpassword")}>Forgot Password</MenuItem>
+                  <MenuItem onClick={() => handleMenuClick("/checkout")}>Checkout</MenuItem>
                 </Menu>
-              </>
-            ) : (<>
+              </> :
+
+              <>
               <Button color="inherit" onClick={() => handleMenuClick("/")}>Home</Button>
               <Button color="inherit" onClick={() => handleMenuClick("/login")}>Login</Button>
               <Button color="inherit" onClick={() => handleMenuClick("/register")}>Register</Button>
               <Button color="inherit" onClick={() => handleMenuClick("/forgotpassword")}>Checkout</Button>
               </>
-            )}
+            }
           </div>
  
         </Toolbar>
