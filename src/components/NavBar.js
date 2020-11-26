@@ -44,14 +44,9 @@ const NavBar = (props) => {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <Typography
-            variant="h6"
-            className={classes.title}
-            onClick={() => handleMenuClick("/")}
-          >
+          <Typography variant="h6" className={classes.title} onClick={() => handleMenuClick("/")}>
             OutSet
           </Typography>
-
           <div>
             {isMobile ? 
               <>
@@ -79,7 +74,6 @@ const NavBar = (props) => {
               </>
             }
           </div>
- 
         </Toolbar>
       </AppBar>
     </div>
